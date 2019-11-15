@@ -9,80 +9,51 @@ namespace Fraction
 {
     class Drib
     {
+
         static void Main()
         {
-            fraction first = new fraction();
-            fraction second = new fraction();
-            string s = Console.ReadLine();
-            Regex regex = new Regex(@"(\w*)/(\w*)");
-            MatchCollection matches = regex.Matches(s);
-            if (matches.Count > 0)
+            Init();
+        }
+        static void Init()
+        {
+            string ss = Console.ReadLine();
+            fraction drib1 = new fraction();
+            fraction drib2 = new fraction();
+            string[] s = ss.Split(' ');
+            if (s.Length > 1)
             {
-                for(int i=0;i<matches.Count;i++)
-                //foreach (Match match in matches)
+                if (FractionFactory.IsFraction(s[0]))
                 {
-                    string[] abc = (matches[0].Value).Split('/');
-
-                    first.numerator = int.Parse(abc[0]);
-                    first.denominator = int.Parse(abc[1]);
-                    string[] bcd = (matches[1].Value).Split('/');
-                    second.numerator = int.Parse(bcd[0]);
-                    second.denominator = int.Parse(bcd[1]);
-                    Console.WriteLine();
+                    drib1 = FractionFactory.MakeFraction(s[0]); 
+                }
+                if (FractionFactory.IsFraction(s[2]))
+                {
+                    drib2 = FractionFactory.MakeFraction(s[2]);
+                    (drib1 + drib2).Write();
                 }
             }
             else
             {
                 Console.WriteLine("Совпадений не найдено");
             }
-            string[] FindZnak = s.Split(' ');
-            if (FindZnak.Length > 0)
-            {
-                foreach (string x in FindZnak) 
-                {
-                    switch (x)
-                    {
-                        case "+":
-                            first.Write();
-                            Console.Write(" + ");
-                            second.Write();
-                            Console.Write(" = ");
-                            (first + second).Write();
-                            Console.WriteLine();
-                            break;
-                        case "-":
-                            first.Write();
-                            Console.Write(" - ");
-                            second.Write();
-                            Console.Write(" = ");
-                            (first - second).Write();
-                            Console.WriteLine();
-                            break;
-                        default:
-                            break;
-                            
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("SMTH WENT WRONG");
-            }
         }
+        
 
         //===============================================================================
         struct fraction
         {
-            public fraction(int Numerator, int Denominator)
-            {
-                numerator = Numerator;
-                denominator = Denominator;
-            } 
-            public int numerator { get; set; }
-            public int denominator { get; set; }
+            public int numerator;
+            public int denominator;
             public void Write()
             {
                 Console.Write(numerator + "/" + denominator);
+            }
+            public static implicit operator fraction(int x)
+            {
+                fraction qwqwq = new fraction();
+                qwqwq.numerator = x;
+                qwqwq.denominator = 1;
+                return qwqwq;
             }
             public static fraction operator +(fraction first, fraction second)
             {
@@ -135,6 +106,36 @@ namespace Fraction
                     else b %= a;
                 }
                 return a + b;
+            }
+        }
+        static class FractionFactory
+        {
+            public static bool IsFraction(string str)
+            {
+                string[] strArray = str.Split('/');
+                if (strArray.Length == 2)
+                {
+                    bool Parseable1 = int.TryParse(strArray[0], out _);
+                    if (Parseable1)
+                    {
+                        bool Parseable2 = int.TryParse(strArray[1], out _);
+                        if (Parseable2)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            public static fraction MakeFraction(string str)
+            {
+                string[] strArray = str.Split('/');
+                fraction temp = new fraction
+                {
+                    numerator = int.Parse(strArray[0]),
+                    denominator = int.Parse(strArray[1])
+                };
+                return temp;
             }
         }
     }
