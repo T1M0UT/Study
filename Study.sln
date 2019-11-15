@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fraction", "Fraction\Fraction.csproj", "{4F23C305-B646-47C2-887B-6D1931F9914A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACMP", "Негрухой телефон\ACMP.csproj", "{456536A9-A7A9-4199-B2F8-25791451CD2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{27C20A39-9738-4EE1-83E8-1634D3779AA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{4F23C305-B646-47C2-887B-6D1931F9914A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F23C305-B646-47C2-887B-6D1931F9914A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F23C305-B646-47C2-887B-6D1931F9914A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{456536A9-A7A9-4199-B2F8-25791451CD2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{456536A9-A7A9-4199-B2F8-25791451CD2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{456536A9-A7A9-4199-B2F8-25791451CD2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{456536A9-A7A9-4199-B2F8-25791451CD2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C20A39-9738-4EE1-83E8-1634D3779AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C20A39-9738-4EE1-83E8-1634D3779AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C20A39-9738-4EE1-83E8-1634D3779AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C20A39-9738-4EE1-83E8-1634D3779AA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

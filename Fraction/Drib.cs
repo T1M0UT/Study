@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Fraction
 {
@@ -10,35 +11,82 @@ namespace Fraction
     {
         static void Main()
         {
-            int n1 = 3;
-            int d1 = 4;
-            int n2 = 4;
-            int d2 = 8;
             fraction first = new fraction();
             fraction second = new fraction();
-            first.numerator = n1;
-            first.denominator = d1;
-            first.Write();
-            Console.Write(" + ");
-            second.numerator = n2;
-            second.denominator = d2;
-            second.Write();
-            Console.Write(" = ");
-            (first + second).Write();
-            Console.WriteLine();
+            string s = Console.ReadLine();
+            Regex regex = new Regex(@"(\w*)/(\w*)");
+            MatchCollection matches = regex.Matches(s);
+            if (matches.Count > 0)
+            {
+                for(int i=0;i<matches.Count;i++)
+                //foreach (Match match in matches)
+                {
+                    string[] abc = (matches[0].Value).Split('/');
+
+                    first.numerator = int.Parse(abc[0]);
+                    first.denominator = int.Parse(abc[1]);
+                    string[] bcd = (matches[1].Value).Split('/');
+                    second.numerator = int.Parse(bcd[0]);
+                    second.denominator = int.Parse(bcd[1]);
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Совпадений не найдено");
+            }
+            string[] FindZnak = s.Split(' ');
+            if (FindZnak.Length > 0)
+            {
+                foreach (string x in FindZnak) 
+                {
+                    switch (x)
+                    {
+                        case "+":
+                            first.Write();
+                            Console.Write(" + ");
+                            second.Write();
+                            Console.Write(" = ");
+                            (first + second).Write();
+                            Console.WriteLine();
+                            break;
+                        case "-":
+                            first.Write();
+                            Console.Write(" - ");
+                            second.Write();
+                            Console.Write(" = ");
+                            (first - second).Write();
+                            Console.WriteLine();
+                            break;
+                        default:
+                            break;
+                            
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("SMTH WENT WRONG");
+            }
         }
+
         //===============================================================================
         struct fraction
         {
-            public int numerator;
-            public int denominator;
+            public fraction(int Numerator, int Denominator)
+            {
+                numerator = Numerator;
+                denominator = Denominator;
+            } 
+            public int numerator { get; set; }
+            public int denominator { get; set; }
             public void Write()
             {
                 Console.Write(numerator + "/" + denominator);
             }
             public static fraction operator +(fraction first, fraction second)
             {
-                fraction first_second;
+                fraction first_second = new fraction();
                 if (first.denominator != second.denominator)
                 {
                     first_second.denominator = NSK(first.denominator, second.denominator);
@@ -48,6 +96,24 @@ namespace Fraction
                 {
                     first_second.denominator = first.denominator;
                     first_second.numerator = first.numerator + second.numerator;
+                }
+                int temp_NSD = NSD(first_second.numerator, first_second.denominator);
+                first_second.numerator /= temp_NSD;
+                first_second.denominator /= temp_NSD;
+                return first_second;
+            }
+            public static fraction operator -(fraction first, fraction second)
+            {
+                fraction first_second = new fraction();
+                if (first.denominator != second.denominator)
+                {
+                    first_second.denominator = NSK(first.denominator, second.denominator);
+                    first_second.numerator = first.numerator * NSK(first.denominator, second.denominator) / first.denominator - second.numerator * NSK(first.denominator, second.denominator) / second.denominator;
+                }
+                else
+                {
+                    first_second.denominator = first.denominator;
+                    first_second.numerator = first.numerator - second.numerator;
                 }
                 int temp_NSD = NSD(first_second.numerator, first_second.denominator);
                 first_second.numerator /= temp_NSD;
@@ -70,7 +136,6 @@ namespace Fraction
                 }
                 return a + b;
             }
-
         }
     }
 }
