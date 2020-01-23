@@ -13,6 +13,7 @@ namespace Fraction
         static void Main()
         {
             Init();
+            Console.WriteLine();
         }
         static void Init()
         {
@@ -24,12 +25,23 @@ namespace Fraction
             {
                 if (FractionFactory.IsFraction(s[0]))
                 {
-                    drib1 = FractionFactory.MakeFraction(s[0]); 
+                    drib1 = FractionFactory.MakeFraction(s[0]);
                 }
                 if (FractionFactory.IsFraction(s[2]))
                 {
                     drib2 = FractionFactory.MakeFraction(s[2]);
-                    (drib1 + drib2).Write();
+                }
+                switch (s[1])
+                {
+                    case "+":
+                        (drib1 + drib2).Write();
+                        break;
+                    case "-":
+                        (drib1 - drib2).Write();
+                        break;
+                    default:
+                        Console.WriteLine("Error +/-");
+                        break;
                 }
             }
             else
@@ -113,16 +125,18 @@ namespace Fraction
             public static bool IsFraction(string str)
             {
                 string[] strArray = str.Split('/');
-                if (strArray.Length == 2)
+                if (strArray.Length == 1)
+                {
+                    bool Parseable3 = int.TryParse(strArray[0], out _);
+                    if (Parseable3) return true;
+                }
+                else if (strArray.Length == 2)
                 {
                     bool Parseable1 = int.TryParse(strArray[0], out _);
                     if (Parseable1)
                     {
                         bool Parseable2 = int.TryParse(strArray[1], out _);
-                        if (Parseable2)
-                        {
-                            return true;
-                        }
+                        if (Parseable2) return true;
                     }
                 }
                 return false;
@@ -130,11 +144,10 @@ namespace Fraction
             public static fraction MakeFraction(string str)
             {
                 string[] strArray = str.Split('/');
-                fraction temp = new fraction
-                {
-                    numerator = int.Parse(strArray[0]),
-                    denominator = int.Parse(strArray[1])
-                };
+                fraction temp = new fraction();
+                temp.numerator = int.Parse(strArray[0]);
+                if (strArray.Length == 1)  temp.denominator = 1;
+                else temp.denominator = int.Parse(strArray[1]);
                 return temp;
             }
         }
