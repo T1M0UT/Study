@@ -1,31 +1,69 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test
+namespace Queue
 {
-    class Program
+    class Node
     {
-        public static long n=40;
-        static void Main(string[] args)
+        private int value;
+        private Node back;
+        public Node Next { get; private set; }
+        public Node(int value)
         {
-            Console.WriteLine(Fibonachi(n));
-
+            this.value = value;
+            Next = null;
+            back = null;
         }
-        public static long[] Cache = new long[n];
-        static long Fibonachi(long n)
+        public void Add(int newValue)
         {
-            if (n < 2) return n;
+            if (back==null)
             {
-                if (Cache[n] != 0)
-                {
-                    return Cache[n];
-                }
-                Cache[n]=Fibonachi(n - 1) + Fibonachi(n - 2);
-                return Cache[n];
+                back = new Node(newValue);
+                Next = back;
+            }
+            else
+            {
+                back.Add(newValue);
             }
         }
+        public List<int> GetList(List<int> answer)
+        {
+            answer.Add(value);
+            Next?.GetList(answer);
+            return answer;
+        }
+        public override String ToString() => string.Join(", ", GetList(new List<int>()));
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Queue
+{
+    class QueueUI
+    {
+        private Node Root;
+        public QueueUI()
+        {
+            Root = null;
+        }
+        public void Add(int newValue)
+        {
+            if (Root == null)
+            {
+                Root = new Node(newValue);
+            }
+            else
+            {
+                Root.Add(newValue);
+            }
+        }
+        public override string ToString() => Root == null ? "No tree" : Root.ToString();
     }
 }
