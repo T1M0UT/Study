@@ -8,7 +8,6 @@ namespace Solv
 { 
 class Solution
 {
-    public static int Count;
     static void Main(string[] args)
     {
         int y=0;
@@ -21,12 +20,12 @@ class Solution
             foreach(char x in telephone)
             {
                 tree.Add(x);
-                y=Count;
+                y=tree.Count();
                 Console.WriteLine(y);
             }
         }
-        
     }
+}
 class Tree
     {
         private Node Root;
@@ -34,7 +33,6 @@ class Tree
         public Tree()
         {
             Root = null;
-            Count=0;
         }
         public void Add(int newValue)
         {
@@ -47,7 +45,7 @@ class Tree
                 Root.Add(newValue);
             }
         }
-       // public int GetL()=>newValue.Count;
+       public int Count()=>Root.Counter(Root);
     }
 class Node
     {
@@ -80,39 +78,56 @@ class Node
         {
             switch(newValue){
                 case 1:
-                    if (One == null) {One = new Node(newValue);Count++;};                    
+                    if (One == null) {One = new Node(newValue);};                    
                     break;
                 case 2:
-                    if (Two == null) {Two = new Node(newValue);Count++;}
+                    if (Two == null) {Two = new Node(newValue);}
                     break;
                 case 3:
-                    if (Three == null) {Three = new Node(newValue);Count++;}
+                    if (Three == null) {Three = new Node(newValue);}
                     break;
                 case 4:
-                    if (Four == null) {Four = new Node(newValue);Count++;}
+                    if (Four == null) {Four = new Node(newValue);}
                     break;
                 case 5:
-                    if (Five == null) {Five = new Node(newValue);Count++;}
+                    if (Five == null) {Five = new Node(newValue);}
                     break;
                 case 6:
-                    if (Six == null) {Six = new Node(newValue);Count++;}
+                    if (Six==null) {Six = new Node(newValue);}
                     break;
                 case 7:
-                    if (Seven == null) {Seven = new Node(newValue);Count++;}
+                    if (Seven == null) {Seven = new Node(newValue);}
                     break;
                 case 8:
-                    if (Eight == null) {Eight = new Node(newValue);Count++;}
+                    if (Eight == null) {Eight = new Node(newValue);}
                     break;
                 case 9:
-                    if (Nine == null) {Nine = new Node(newValue);Count++;}
+                    if (Nine == null) {Nine = new Node(newValue);}
                     break;
                 case 0:
-                    if (O == null) {O = new Node(newValue);Count++;}
+                    if (O == null) {O = new Node(newValue);}
+                    break;
+                default:
+                    Console.WriteLine("ERR");
                     break;
             }
         }
+        public int Counter(Node node){
+            int result=0;
+            if(node.One!=null) Counter(node.One()); 
+            if(node.Two!=null) Counter(node.Two()); 
+            if(node.Three!=null) Counter(node.Three()); 
+            if(node.Four!=null) Counter(node.Four()); 
+            if(node.Five!=null) Counter(node.Five()); 
+            if(node.Six!=null) Counter(node.Six()); 
+            if(node.Seven!=null) Counter(node.Seven()); 
+            if(node.Eight!=null) Counter(node.Eight()); 
+            if(node.Nine!=null) Counter(node.Nine()); 
+            if(node.O!=null) Counter(node.O()); 
+            else result++;
+            return result;
+        }
     }
-}
 }
 //=====================================
 using System;
