@@ -8,33 +8,33 @@ namespace Solv
 { 
 class Solution
 {
+    public static int Count;
     static void Main(string[] args)
     {
-        int N = int.Parse(Console.ReadLine());
-        int sum=0;
+        int y=0;
         Tree tree=new Tree();
+        tree.Add(0);
+        int N = int.Parse(Console.ReadLine());
         for (int i = 0; i < N; i++)
         {
             string telephone = Console.ReadLine();
-            char[] a=telephone.ToCharArray();
-            if(a[0]!=tree.Root) ;
-            for(int i=1;i<telephone.Length; i++)
-            {   
+            foreach(char x in telephone)
+            {
                 tree.Add(x);
+                y=Count;
+                Console.WriteLine(y);
             }
         }
-
-
-        // The number of elements (referencing a number) stored in the structure.
-        //Console.WriteLine("number");
+        
     }
-}
 class Tree
     {
-        public Node Root;
+        private Node Root;
+        
         public Tree()
         {
             Root = null;
+            Count=0;
         }
         public void Add(int newValue)
         {
@@ -47,32 +47,72 @@ class Tree
                 Root.Add(newValue);
             }
         }
+       // public int GetL()=>newValue.Count;
     }
 class Node
     {
         private int value;
-        public Node Left { get; private set; }
-        public Node Right { get; private set; }
+        public Node One { get; private set; }
+        public Node Two { get; private set; }
+        public Node Three { get; private set; }
+        public Node Four { get; private set; }
+        public Node Five { get; private set; }
+        public Node Six { get; private set; }
+        public Node Seven { get; private set; }
+        public Node Eight { get; private set; }
+        public Node Nine { get; private set; }
+        public Node O { get; private set; }
         public Node(int value)
         {
             this.value = value;
-            Left = null;
-            Right = null;
+            One = null;
+            Two = null;
+            Three = null;
+            Four = null;
+            Five = null;
+            Six = null;
+            Seven = null;
+            Eight = null;
+            Nine = null;
+            O = null;
         }
         public void Add(int newValue)
         {
-            if (value >= newValue)
-            {
-                if (Left == null) Left = new Node(newValue);
-                else Left.Add(newValue);
-            }
-            else
-            {
-                if (Right == null) Right = new Node(newValue);
-                else Right.Add(newValue);
+            switch(newValue){
+                case 1:
+                    if (One == null) {One = new Node(newValue);Count++;};                    
+                    break;
+                case 2:
+                    if (Two == null) {Two = new Node(newValue);Count++;}
+                    break;
+                case 3:
+                    if (Three == null) {Three = new Node(newValue);Count++;}
+                    break;
+                case 4:
+                    if (Four == null) {Four = new Node(newValue);Count++;}
+                    break;
+                case 5:
+                    if (Five == null) {Five = new Node(newValue);Count++;}
+                    break;
+                case 6:
+                    if (Six == null) {Six = new Node(newValue);Count++;}
+                    break;
+                case 7:
+                    if (Seven == null) {Seven = new Node(newValue);Count++;}
+                    break;
+                case 8:
+                    if (Eight == null) {Eight = new Node(newValue);Count++;}
+                    break;
+                case 9:
+                    if (Nine == null) {Nine = new Node(newValue);Count++;}
+                    break;
+                case 0:
+                    if (O == null) {O = new Node(newValue);Count++;}
+                    break;
             }
         }
     }
+}
 }
 //=====================================
 using System;
