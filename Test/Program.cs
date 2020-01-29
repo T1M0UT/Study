@@ -1,4 +1,81 @@
 using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+namespace Solv
+{ 
+class Solution
+{
+    static void Main(string[] args)
+    {
+        int N = int.Parse(Console.ReadLine());
+        int sum=0;
+        Tree tree=new Tree();
+        for (int i = 0; i < N; i++)
+        {
+            string telephone = Console.ReadLine();
+            char[] a=telephone.ToCharArray();
+            if(a[0]!=tree.Root) ;
+            for(int i=1;i<telephone.Length; i++)
+            {   
+                tree.Add(x);
+            }
+        }
+
+
+        // The number of elements (referencing a number) stored in the structure.
+        //Console.WriteLine("number");
+    }
+}
+class Tree
+    {
+        public Node Root;
+        public Tree()
+        {
+            Root = null;
+        }
+        public void Add(int newValue)
+        {
+            if (Root == null)
+            {
+                Root = new Node(newValue);
+            }
+            else
+            {
+                Root.Add(newValue);
+            }
+        }
+    }
+class Node
+    {
+        private int value;
+        public Node Left { get; private set; }
+        public Node Right { get; private set; }
+        public Node(int value)
+        {
+            this.value = value;
+            Left = null;
+            Right = null;
+        }
+        public void Add(int newValue)
+        {
+            if (value >= newValue)
+            {
+                if (Left == null) Left = new Node(newValue);
+                else Left.Add(newValue);
+            }
+            else
+            {
+                if (Right == null) Right = new Node(newValue);
+                else Right.Add(newValue);
+            }
+        }
+    }
+}
+//=====================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
